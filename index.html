@@ -20,7 +20,7 @@
           <div class="col-12 text-center">
             <h1>Logo</h1>
           </div>
-          <div id="total" class="text-center"><h1></h1></div>
+          <div id="total" class="text-center"></div>
         </div>
       </div>
     </section>
@@ -30,13 +30,13 @@
           <div class="col-lg-6">
             <div><h2>Przychody</h2></div> 
             <div class="row">
-              <div class="col-4"><input id="incomeName" placeholder="Nazwa przychodu" class="alert-primary" type="text" /></div>
-              <div class="col-4"><input id="incomeAmount" placeholder="Kwota" class="alert-primary" type="number" /></div>
-              <div class="col-4"><button id="addIncome">Dodaj</button></div>
+              <div class="col"><input id="incomeName" placeholder="Nazwa przychodu" class="alert-primary" type="text" /></div>
+              <div class="col"><input id="incomeAmount" placeholder="Kwota" class="alert-primary" type="number" /></div>
+              <div class="col"><button id="addIncome">Dodaj</button></div>
             </div>
             <div id="income"></div>
             <div class="row">
-              <div class="col-6">Suma Przychodów:</div>
+              <div id="totalIncome" class="col-6">Suma Przychodów:</div>
               <div class="col-6"></div>
             </div>
           </div>
@@ -44,16 +44,16 @@
           <div class="col-lg-6 ">
             <div><h2>Wydatki</h2></div>
             <div class="row">
-              <div class="col-4">
+              <div class="col">
                 <input id="expenseName" placeholder="Nazwa wydatku" class="alert-primary"  type="text" /></div>
-                <div class="col-4">
+                <div class="col">
                   <input id="expenseAmount" placeholder="Kwota" class="alert-primary"  type="number" />
                 </div>
-                <div class="col-4"><button id="addExpense">Dodaj</button></div>
+                <div class="col"><button id="addExpense">Dodaj</button></div>
               </div>
               <div id="expense"></div>
               <div class="row">
-                <div class="col-6">Suma Wydaktów:</div>
+                <div id="totalExpense" class="col-6">Suma Wydaktów:</div>
                 <div class="col-6"></div>
               </div>
             </div>

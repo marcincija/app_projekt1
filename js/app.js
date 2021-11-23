@@ -1,5 +1,8 @@
-var amountSum = 0;
-var total = document.getElementById("total");
+var amountSumIncome = 0;
+var amountSumExpense = 0;
+var totalIncome = document.getElementById("totalIncome");
+var totalExpense = document.getElementById("totalExpense");
+
 const add = (addButton, name, amount, add) => {
   addButton.addEventListener("click", () => {
     if (name.value != 0 && amount.value != 0) {
@@ -10,11 +13,13 @@ const add = (addButton, name, amount, add) => {
           </div>`;
 
       if (add === document.getElementById("income")) {
-        amountSum = amountSum + amount.valueAsNumber;
-        total.innerHTML = `<h1>${amountSum}</h1>`;
-      } else {
-        amountSum = amountSum - amount.valueAsNumber;
-        total.innerHTML = `<h1>${amountSum}</h1>`;
+        amountSumIncome += amount.valueAsNumber;
+        totalIncome.innerHTML = `Suma Przychodów: ${amountSumIncome}`;
+      }
+
+      if (add === document.getElementById("expense")) {
+        amountSumExpense += amount.valueAsNumber;
+        totalExpense.innerHTML = `Suma Przychodów: ${amountSumExpense}`;
       }
     } else;
   });
@@ -27,8 +32,12 @@ const deleteItem = () => {
     row[i].onclick = () => {
       let amount = row[i].querySelector("li").textContent;
       amount = amount.split("-");
-      amountSum -= amount[1];
-      total.innerHTML = `<h1>${amountSum}</h1>`;
+
+      if (add === document.getElementById("income")) {
+        amountSumIncome -= amount[1];
+        totalIncome.innerHTML = `Suma Przychodów: ${amountSumIncome} `;
+      }
+
       row[i].remove();
     };
   }

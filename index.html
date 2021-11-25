@@ -10,6 +10,8 @@
       integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
       crossorigin="anonymous"
     />
+
+    
     <link rel="stylesheet" href="css/style.css" />
     <title>Document</title>
   </head>
@@ -20,40 +22,40 @@
           <div class="col-12 text-center">
             <h1>Logo</h1>
           </div>
-          <div id="total" class="text-center"></div>
+          <div id="total" class="text-center">0</div>
         </div>
       </div>
     </section>
     <section>
       <div class="container">
         <div class="row">
-          <div class="col-lg-6">
+          <div class="col-lg-6 border border-primary">
             <div><h2>Przychody</h2></div> 
-            <div class="row">
-              <div class="col"><input id="incomeName" placeholder="Nazwa przychodu" class="alert-primary" type="text" /></div>
-              <div class="col"><input id="incomeAmount" placeholder="Kwota" class="alert-primary" type="number" /></div>
-              <div class="col"><button id="addIncome">Dodaj</button></div>
+            <div class="row border-bottom border-primary space">
+              <div class="col"><input id="incomeName" placeholder="Nazwa przychodu" class="input-group-text" type="text" /></div>
+              <div class="col"><input id="incomeAmount" placeholder="Kwota" class="input-group-text" type="number" /></div>
+              <div class="col"><button id="addIncome" class="btn btn-primary">Dodaj</button></div>
             </div>
             <div id="income"></div>
             <div class="row">
-              <div id="totalIncome" class="col-6">Suma Przychodów:</div>
+              <div id="totalIncome" class="col-6">Suma Przychodów: 0</div>
               <div class="col-6"></div>
             </div>
           </div>
 
-          <div class="col-lg-6 ">
+          <div class="col-lg-6 border border-primary">
             <div><h2>Wydatki</h2></div>
-            <div class="row">
+            <div class="row border-bottom border-primary space">
               <div class="col">
-                <input id="expenseName" placeholder="Nazwa wydatku" class="alert-primary"  type="text" /></div>
+                <input id="expenseName" placeholder="Nazwa wydatku" class="input-group-text"  type="text" /></div>
                 <div class="col">
-                  <input id="expenseAmount" placeholder="Kwota" class="alert-primary"  type="number" />
+                  <input id="expenseAmount" placeholder="Kwota" class="input-group-text"  type="number" />
                 </div>
-                <div class="col"><button id="addExpense">Dodaj</button></div>
+                <div class="col"><button id="addExpense" class="btn btn-primary   ">Dodaj</button></div>
               </div>
               <div id="expense"></div>
-              <div class="row">
-                <div id="totalExpense" class="col-6">Suma Wydaktów:</div>
+              <div class="row ">
+                <div id="totalExpense" class="col-6">Suma Wydaktów: 0</div>
                 <div class="col-6"></div>
               </div>
             </div>

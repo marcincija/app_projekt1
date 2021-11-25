@@ -1,5 +1,4 @@
 #total {
-  border: 1px solid #000;
   width: 50%;
   margin: 0 auto;
   margin-top: 20px;
@@ -8,15 +7,15 @@
 }
 
 #expense {
-  border: 1px solid #000;
-
   margin-top: 20px;
   padding: 10px 10px 10px 10px;
 }
 
 #income {
-  border: 1px solid #000;
-
   margin-top: 20px;
   padding: 10px 10px 10px 10px;
+}
+
+.space {
+  padding: 20px;
 }

@@ -1,5 +1,6 @@
 var amountSumIncome = 0;
 var amountSumExpense = 0;
+var total = 0;
 var totalIncome = document.getElementById("totalIncome");
 var totalExpense = document.getElementById("totalExpense");
 var totalAmount = document.getElementById("total");
@@ -12,7 +13,7 @@ const add = (addButton, name, amount, addItem) => {
       addItem === document.getElementById("income")
     ) {
       addItem.innerHTML += `<div class="row addRow income">
-          <div class="col-sm-8 nameAmount"><ul><li>${name.value} - ${amount.value}</li></ul></div>
+          <div class="col-sm-8 nameAmount"><ul><li>${name.value} - ${amount.value} zł</li></ul></div>
           <div class="col"><button class="edit btn btn-success" onclick="editItem()">Edytuj</button></div>
           <div class="col"><button class="delete btn btn-success" onclick="deleteItem()">Usuń</button></div>
           </div>`;
@@ -23,7 +24,7 @@ const add = (addButton, name, amount, addItem) => {
       addItem === document.getElementById("expense")
     ) {
       addItem.innerHTML += `<div class="row addRow expense">
-          <div class="col-sm-8 nameAmount"><ul><li>${name.value} - ${amount.value}</li></ul></div>
+          <div class="col-sm-8 nameAmount"><ul><li>${name.value} - ${amount.value} zł</li></ul></div>
           <div class="col"><button class="edit btn btn-success" onclick="editItem()">Edytuj</button></div>
           <div class="col"><button class="delete btn btn-success" onclick="deleteItem()">Usuń</button></div>
           </div>`;
@@ -36,11 +37,15 @@ const addIncome = (amount, addItem) => {
   if (addItem === document.getElementById("income")) {
     amountSumIncome += amount.valueAsNumber;
     totalIncome.innerHTML = `Suma Przychodów: ${amountSumIncome}`;
+    total = amountSumIncome - amountSumExpense;
+    checkTotal();
   }
 
   if (addItem === document.getElementById("expense")) {
     amountSumExpense += amount.valueAsNumber;
     totalExpense.innerHTML = `Suma Wydatków: ${amountSumExpense}`;
+    total = amountSumIncome - amountSumExpense;
+    checkTotal();
   }
 };
 
@@ -50,20 +55,26 @@ const deleteItem = () => {
   for (let i = 0; i < row.length; i++) {
     row[i].onclick = () => {
       let amount = row[i].querySelector("li").textContent;
-      amount = amount.split("-");
+      amount = amount.split(" ");
+
+      console.log(amount);
 
       let check = row[i].className;
       check = check.split(" ");
       row[i].remove();
 
       if (check[2] === "income") {
-        amountSumIncome -= Number(amount[1]);
+        amountSumIncome -= Number(amount[2]);
         totalIncome.innerHTML = `Suma Przychodów: ${amountSumIncome}`;
+        total = amountSumIncome - amountSumExpense;
+        checkTotal();
       }
 
       if (check[2] === "expense") {
-        amountSumExpense -= Number(amount[1]);
+        amountSumExpense -= Number(amount[2]);
         totalExpense.innerHTML = `Suma Wydatków: ${amountSumExpense}`;
+        total = amountSumIncome - amountSumExpense;
+        checkTotal();
       }
     };
   }
@@ -76,6 +87,16 @@ const editItem = () => {
     row[i].onclick = () => {
       console.log(row[i]);
     };
+  }
+};
+
+const checkTotal = () => {
+  if (total > 0) {
+    totalAmount.innerHTML = `Możesz jeszcze wydać ${total} złotych`;
+  } else if (total === 0) {
+    totalAmount.innerHTML = `Bilans wynosi zero`;
+  } else {
+    totalAmount.innerHTML = `Bilans jest ujemny. Jesteś na minusie ${total} złotych`;
   }
 };
 

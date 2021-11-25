@@ -13,7 +13,7 @@ const add = (addButton, name, amount, addItem) => {
       addItem === document.getElementById("income")
     ) {
       addItem.innerHTML += `<div class="row addRow income">
-          <div class="col-sm-8 nameAmount"><ul><li>${name.value} - ${amount.value} zł</li></ul></div>
+          <div class="col nameAmount"><ul><li>${name.value} - ${amount.value} zł</li></ul></div>
           <div class="col"><button class="edit btn btn-success" onclick="editItem()">Edytuj</button></div>
           <div class="col"><button class="delete btn btn-success" onclick="deleteItem()">Usuń</button></div>
           </div>`;
@@ -24,7 +24,7 @@ const add = (addButton, name, amount, addItem) => {
       addItem === document.getElementById("expense")
     ) {
       addItem.innerHTML += `<div class="row addRow expense">
-          <div class="col-sm-8 nameAmount"><ul><li>${name.value} - ${amount.value} zł</li></ul></div>
+          <div class="col nameAmount"><ul><li>${name.value} - ${amount.value} zł</li></ul></div>
           <div class="col"><button class="edit btn btn-success" onclick="editItem()">Edytuj</button></div>
           <div class="col"><button class="delete btn btn-success" onclick="deleteItem()">Usuń</button></div>
           </div>`;

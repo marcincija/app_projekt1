@@ -4,6 +4,7 @@ var total = 0;
 var totalIncome = document.getElementById("totalIncome");
 var totalExpense = document.getElementById("totalExpense");
 var totalAmount = document.getElementById("total");
+var j = 0;
 
 const add = (addButton, name, amount, addItem) => {
   addButton.addEventListener("click", () => {
@@ -14,8 +15,8 @@ const add = (addButton, name, amount, addItem) => {
     ) {
       addItem.innerHTML += `<div class="row addRow income">
           <div class="col nameAmount"><ul><li>${name.value} - ${amount.value} zł</li></ul></div>
-          <div class="col"><button class="edit btn btn-success" onclick="editItem()">Edytuj</button></div>
-          <div class="col"><button class="delete btn btn-success" onclick="deleteItem()">Usuń</button></div>
+          <div class="col edit"><button class=" btn btn-success" onclick="editItemIncome()">Edytuj</button></div>
+          <div class="col delete"><button class=" btn btn-success" onclick="deleteItem()">Usuń</button></div>
           </div>`;
       addIncome(amount, addItem);
     } else if (
@@ -24,9 +25,9 @@ const add = (addButton, name, amount, addItem) => {
       addItem === document.getElementById("expense")
     ) {
       addItem.innerHTML += `<div class="row addRow expense">
-          <div class="col nameAmount"><ul><li>${name.value} - ${amount.value} zł</li></ul></div>
-          <div class="col"><button class="edit btn btn-success" onclick="editItem()">Edytuj</button></div>
-          <div class="col"><button class="delete btn btn-success" onclick="deleteItem()">Usuń</button></div>
+          <div class="col nameAmount" ><ul><li>${name.value} - ${amount.value} zł</li></ul></div>
+          <div class="col edit"><button class=" btn btn-success " onclick="editItemExpense()">Edytuj</button></div>
+          <div class="col delete"><button class=" btn btn-success" onclick="deleteItem()">Usuń</button></div>
           </div>`;
       addIncome(amount, addItem);
     }
@@ -50,18 +51,21 @@ const addIncome = (amount, addItem) => {
 };
 
 const deleteItem = () => {
+  let buttonDelete = document.querySelectorAll(".delete");
+  let nameAmount = document.querySelectorAll(".nameAmount");
   let row = document.querySelectorAll(".row.addRow");
 
-  for (let i = 0; i < row.length; i++) {
-    row[i].onclick = () => {
-      let amount = row[i].querySelector("li").textContent;
+  for (let i = 0; i < buttonDelete.length; i++) {
+    buttonDelete[i].onclick = () => {
+      console.log(buttonDelete[i]);
+      let amount = nameAmount[i].querySelector("li").textContent;
       amount = amount.split(" ");
-
-      console.log(amount);
 
       let check = row[i].className;
       check = check.split(" ");
       row[i].remove();
+
+      console.log(check);
 
       if (check[2] === "income") {
         amountSumIncome -= Number(amount[2]);
@@ -80,13 +84,35 @@ const deleteItem = () => {
   }
 };
 
-const editItem = () => {
-  let row = document.querySelectorAll(".row.addRow");
+const editItemIncome = () => {
+  let editRow = document.querySelectorAll(".income");
+  let value;
+  let editButton;
 
-  for (let i = 0; i < row.length; i++) {
-    row[i].onclick = () => {
-      console.log(row[i]);
-    };
+  for (let i = 0; i < editRow.length; i++) {
+    editRow[i].addEventListener("click", () => {
+      value = editRow[i].querySelector("li");
+      editButton = editRow[i].querySelector(".edit");
+      value.innerHTML = `<input type="value" />`;
+      editButton.innerHTML = "<button>Zatwierdź</button>";
+      console.log(editButton);
+    });
+  }
+};
+
+const editItemExpense = () => {
+  let editRow = document.querySelectorAll(".expense");
+  let value;
+  let editButton;
+
+  for (let i = 0; i < editRow.length; i++) {
+    editRow[i].addEventListener("click", () => {
+      value = editRow[i].querySelector("li");
+      editButton = editRow[i].querySelector(".edit");
+      value.innerHTML = `<input type="value" />`;
+      editButton.innerHTML = "<button>Zatwierdź</button>";
+      console.log(editButton);
+    });
   }
 };
 

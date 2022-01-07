@@ -94,7 +94,7 @@ const editItemIncome = () => {
       value = editRow[i].querySelector("li");
       editButton = editRow[i].querySelector(".edit");
       value.innerHTML = `<input type="value" />`;
-      editButton.innerHTML = "<button>Zatwierdź</button>";
+      editButton.innerHTML = `<button class="btn btn-primary">Zatwierdź</button>`;
       console.log(editButton);
     });
   }
@@ -110,7 +110,7 @@ const editItemExpense = () => {
       value = editRow[i].querySelector("li");
       editButton = editRow[i].querySelector(".edit");
       value.innerHTML = `<input type="value" />`;
-      editButton.innerHTML = "<button>Zatwierdź</button>";
+      editButton.innerHTML = `<button class="btn btn-primary">Zatwierdź</button>`;
       console.log(editButton);
     });
   }

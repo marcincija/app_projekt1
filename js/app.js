@@ -7,7 +7,7 @@ var totalAmount = document.getElementById("total");
 var j = 0;
 var idIncome = 0;
 var idExpense = 0;
-var approveId = 0;
+var idApprove = 0;
 var id = 0;
 
 const add = (addButton, name, amount, addItem) => {
@@ -108,9 +108,36 @@ const editItemIncome = () => {
       let text = all[0];
       let number = all[2];
 
-      amountSumIncome = amountSumIncome - number;
+      amountSumIncome = amountSumIncome - Number(number);
 
-      button.innerHTML = `<button class="btn btn-primary" onclick="approve()" id="${approveId++}">Zatwierdź</button>`;
+      button.innerHTML = `<button class="btn btn-primary" onclick="approve()" id="${id}">Zatwierdź</button>`;
+      value.innerHTML = `<ul><li><input type="text" id="newName"  placeholder="${text}" /></li>
+      <input type="number" id="newAmount"  placeholder="${number}" /></li>
+      </ul>`;
+    }
+  }
+};
+
+const editItemExpense = () => {
+  let editRow = document.querySelectorAll(".expense");
+
+  document.getElementById("expense").onclick = button;
+
+  function button(e) {
+    if (e.target.tagName == "BUTTON") {
+      id = e.target.id;
+      let value = editRow[id].querySelector("li");
+
+      let button = editRow[id].querySelector(".edit");
+
+      let split = value.textContent;
+      let all = split.split(" ");
+      let text = all[0];
+      let number = all[2];
+
+      amountSumExpense = amountSumExpense - Number(number);
+
+      button.innerHTML = `<button class="btn btn-primary" onclick="approve()" id="${id}">Zatwierdź</button>`;
       value.innerHTML = `<ul><li><input type="text" id="newName"  placeholder="${text}" /></li>
       <input type="number" id="newAmount"  placeholder="${number}" /></li>
       </ul>`;
@@ -119,44 +146,49 @@ const editItemIncome = () => {
 };
 
 function approve() {
-  let editRow = document.querySelectorAll(".income");
+  let editRowIncome = document.querySelectorAll(".income");
+  let editRowExpense = document.querySelectorAll(".expense");
   let amount = document.getElementById("newAmount").value;
   let text = document.getElementById("newName").value;
 
-  document.getElementById("income").onclick = button;
+  document.getElementById("income").onclick = buttonIncome;
 
-  function button(e) {
+  function buttonIncome(e) {
     if (e.target.tagName == "BUTTON") {
-      let value = editRow[id].querySelector("li");
+      let value = editRowIncome[id].querySelector("li");
 
-      let buttonEdit = editRow[id].querySelector(".edit");
+      let buttonEdit = editRowIncome[id].querySelector(".edit");
 
       totalIncome.innerHTML = `Suma Przychodów: ${amountSumIncome}`;
 
       value.innerHTML = `${text} - ${amount} zł`;
-      buttonEdit.innerHTML = `<div class="col edit"><button class=" btn btn-success" id=${idIncome++} onclick="editItemIncome()">Edytuj</button></div>`;
-      amountSumIncome = amountSumIncome + Number(amount);
+      buttonEdit.innerHTML = `<div class="col edit"><button class=" btn btn-success" id=${id} onclick="editItemIncome()">Edytuj</button></div>`;
+
       total = amountSumIncome - amountSumExpense;
       checkTotal();
     }
   }
-}
+  amountSumIncome = amountSumIncome + Number(amount);
 
-const editItemExpense = () => {
-  let editRow = document.querySelectorAll(".expense");
-  let value;
-  let editButton;
+  document.getElementById("expense").onclick = buttonExpense;
 
-  let id;
-  document.getElementById("expense").onclick = button;
-
-  function button(e) {
+  function buttonExpense(e) {
     if (e.target.tagName == "BUTTON") {
-      id = e.target.id;
-      editRow[id].innerHTML = `<input type="text" />`;
+      let value = editRowExpense[id].querySelector("li");
+
+      let buttonEdit = editRowExpense[id].querySelector(".edit");
+
+      totalIncome.innerHTML = `Suma Przychodów: ${amountSumIncome}`;
+
+      value.innerHTML = `${text} - ${amount} zł`;
+      buttonEdit.innerHTML = `<div class="col edit"><button class=" btn btn-success" id=${id} onclick="editItemExpense()">Edytuj</button></div>`;
+
+      total = amountSumIncome - amountSumExpense;
+      checkTotal();
     }
   }
-};
+  // amountSumExpense = amountSumExpense + Number(amount);
+}
 
 const checkTotal = () => {
   if (total > 0) {

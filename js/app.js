@@ -59,49 +59,57 @@ const addIncome = (amount, addItem) => {
 };
 
 const deleteItem = () => {
-  let buttonDelete = document.querySelectorAll(".delete");
-  let nameAmount = document.querySelectorAll(".nameAmount");
-  let row = document.querySelectorAll(".row.addRow");
+  document.getElementById("income").onclick = income;
+  document.getElementById("expense").onclick = expense;
 
-  for (let i = 0; i < buttonDelete.length; i++) {
-    buttonDelete[i].onclick = () => {
-      let amount = nameAmount[i].querySelector("li").textContent;
-      amount = amount.split(" ");
+  function income(e) {
+    if (e.target.tagName == "BUTTON") {
+      parentElement = e.target.closest(".addRow");
+      let value = parentElement.querySelector("li");
 
-      let check = row[i].className;
-      check = check.split(" ");
-      row[i].remove();
+      let split = value.textContent;
+      let all = split.split(" ");
 
-      console.log(amount[2]);
+      let number = all[2];
 
-      if (check[2] === "income") {
-        amountSumIncome -= Number(amount[2]);
-        totalIncome.innerHTML = `Suma Przychodów: ${amountSumIncome}`;
-        total = amountSumIncome - amountSumExpense;
-        checkTotal();
-      }
+      amountSumIncome -= Number(number);
+      totalIncome.innerHTML = `Suma Przychodów: ${amountSumIncome}`;
+      total = amountSumIncome - amountSumExpense;
+      checkTotal();
 
-      if (check[2] === "expense") {
-        amountSumExpense -= Number(amount[2]);
-        totalExpense.innerHTML = `Suma Wydatków: ${amountSumExpense}`;
-        total = amountSumIncome - amountSumExpense;
-        checkTotal();
-      }
-    };
+      deleteElement = e.target.closest(".addRow").remove();
+    }
+  }
+
+  function expense(e) {
+    if (e.target.tagName == "BUTTON") {
+      parentElement = e.target.closest(".addRow");
+      let value = parentElement.querySelector("li");
+
+      let split = value.textContent;
+      let all = split.split(" ");
+
+      let number = all[2];
+
+      amountSumExpense -= Number(number);
+      totalExpense.innerHTML = `Suma Wydatków: ${amountSumExpense}`;
+      total = amountSumIncome - amountSumExpense;
+      checkTotal();
+
+      deleteElement = e.target.closest(".addRow").remove();
+    }
   }
 };
 
 const editItemIncome = () => {
-  let editRow = document.querySelectorAll(".income");
-
   document.getElementById("income").onclick = button;
 
   function button(e) {
     if (e.target.tagName == "BUTTON") {
       id = e.target.id;
-      let value = editRow[id].querySelector("li");
-
-      let button = editRow[id].querySelector(".edit");
+      let parentElement = e.target.closest(".addRow");
+      let value = parentElement.querySelector("li");
+      let button = parentElement.querySelector(".edit");
 
       let split = value.textContent;
       let all = split.split(" ");
@@ -119,16 +127,15 @@ const editItemIncome = () => {
 };
 
 const editItemExpense = () => {
-  let editRow = document.querySelectorAll(".expense");
-
   document.getElementById("expense").onclick = button;
 
   function button(e) {
     if (e.target.tagName == "BUTTON") {
       id = e.target.id;
-      let value = editRow[id].querySelector("li");
+      let parentElement = e.target.closest(".addRow");
+      let value = parentElement.querySelector("li");
 
-      let button = editRow[id].querySelector(".edit");
+      let button = parentElement.querySelector(".edit");
 
       let split = value.textContent;
       let all = split.split(" ");
@@ -146,8 +153,6 @@ const editItemExpense = () => {
 };
 
 function approve() {
-  let editRowIncome = document.querySelectorAll(".income");
-  let editRowExpense = document.querySelectorAll(".expense");
   let amount = document.getElementById("newAmount").value;
   let text = document.getElementById("newName").value;
 
@@ -155,39 +160,39 @@ function approve() {
 
   function buttonIncome(e) {
     if (e.target.tagName == "BUTTON") {
-      let value = editRowIncome[id].querySelector("li");
+      const parentElement = e.target.closest(".addRow");
+      let value = parentElement.querySelector("li");
 
-      let buttonEdit = editRowIncome[id].querySelector(".edit");
-
-      totalIncome.innerHTML = `Suma Przychodów: ${amountSumIncome}`;
+      let buttonEdit = parentElement.querySelector(".edit");
 
       value.innerHTML = `${text} - ${amount} zł`;
       buttonEdit.innerHTML = `<div class="col edit"><button class=" btn btn-success" id=${id} onclick="editItemIncome()">Edytuj</button></div>`;
 
+      amountSumIncome += Number(amount);
+      totalIncome.innerHTML = `Suma Przychodów: ${amountSumIncome}`;
       total = amountSumIncome - amountSumExpense;
       checkTotal();
     }
   }
-  amountSumIncome = amountSumIncome + Number(amount);
 
   document.getElementById("expense").onclick = buttonExpense;
 
   function buttonExpense(e) {
     if (e.target.tagName == "BUTTON") {
-      let value = editRowExpense[id].querySelector("li");
+      const parentElement = e.target.closest(".addRow");
+      let value = parentElement.querySelector("li");
 
-      let buttonEdit = editRowExpense[id].querySelector(".edit");
-
-      totalIncome.innerHTML = `Suma Przychodów: ${amountSumIncome}`;
+      let buttonEdit = parentElement.querySelector(".edit");
 
       value.innerHTML = `${text} - ${amount} zł`;
       buttonEdit.innerHTML = `<div class="col edit"><button class=" btn btn-success" id=${id} onclick="editItemExpense()">Edytuj</button></div>`;
 
+      amountSumExpense += Number(amount);
+      totalExpense.innerHTML = `Suma Wydaktów: ${amountSumExpense}`;
       total = amountSumIncome - amountSumExpense;
       checkTotal();
     }
   }
-  // amountSumExpense = amountSumExpense + Number(amount);
 }
 
 const checkTotal = () => {

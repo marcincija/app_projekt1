@@ -5,9 +5,7 @@ var totalIncome = document.getElementById("totalIncome");
 var totalExpense = document.getElementById("totalExpense");
 var totalAmount = document.getElementById("total");
 var j = 0;
-var idIncome = 0;
-var idExpense = 0;
-var idApprove = 0;
+
 var id = 0;
 
 const add = (addButton, name, amount, addItem) => {
@@ -18,10 +16,8 @@ const add = (addButton, name, amount, addItem) => {
       addItem === document.getElementById("income")
     ) {
       addItem.innerHTML += `<div class="row addRow income">
-          <div class="col nameAmount"><ul><li>${name.value} - ${
-        amount.value
-      } zł</li></ul></div>
-          <div class="col edit"><button class=" btn btn-success" id=${idIncome++} onclick="editItemIncome()">Edytuj</button></div>
+          <div class="col nameAmount"><ul><li>${name.value} - ${amount.value} zł</li></ul></div>
+          <div class="col edit"><button class=" btn btn-success"  onclick="editItemIncome()">Edytuj</button></div>
           <div class="col delete"><button class=" btn btn-success"  onclick="deleteItem()">Usuń</button></div>
           </div>`;
       addIncome(amount, addItem);
@@ -31,10 +27,8 @@ const add = (addButton, name, amount, addItem) => {
       addItem === document.getElementById("expense")
     ) {
       addItem.innerHTML += `<div class="row addRow expense">
-          <div class="col nameAmount" ><ul><li>${name.value} - ${
-        amount.value
-      } zł</li></ul></div>
-          <div class="col edit"><button class=" btn btn-success " id=${idExpense++} onclick="editItemExpense()">Edytuj</button></div>
+          <div class="col nameAmount" ><ul><li>${name.value} - ${amount.value} zł</li></ul></div>
+          <div class="col edit"><button class=" btn btn-success "  onclick="editItemExpense()">Edytuj</button></div>
           <div class="col delete"><button class=" btn btn-success" onclick="deleteItem()">Usuń</button></div>
           </div>`;
       addIncome(amount, addItem);

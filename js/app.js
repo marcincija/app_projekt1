@@ -4,9 +4,6 @@ var total = 0;
 var totalIncome = document.getElementById("totalIncome");
 var totalExpense = document.getElementById("totalExpense");
 var totalAmount = document.getElementById("total");
-var j = 0;
-
-var id = 0;
 
 const add = (addButton, name, amount, addItem) => {
   addButton.addEventListener("click", () => {
